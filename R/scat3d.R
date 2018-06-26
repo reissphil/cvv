@@ -1,0 +1,46 @@
+#' 3D plotting of motion data
+#' 
+#' Inputs a dyadic motion data produced by \code{\link{make.fd}}, and creates a 3D plot of the data for one member of the dyad.
+#' 
+#' @param obj A dyadic motion object outputted by \code{\link{make.fd}}
+#' @param person Which person's data should be plotted: 0 or 1
+#' @param npoints Number of (equally spaced) points to include in the plot
+#' @param deriv Derivative to plot (e.g., 1 for velocity, 2 for acceleration); the default, 0, plots the positions  
+#' @param tmin,tmax Lower and upper ends of the time range
+#' @param cex Magnification factor for the points
+#' @param col Color; the default gives a rainbow plot
+#' @param plotter Character vector describing the plotting function to use: either "\code{\link[rgl]{plot3d}}" or "\code{\link[scatterplot3d]{scatterplot3d}}"
+#' @param \dots Arguments passed to the plotting function.
+#' @return A list with components
+#' \item{tseq}{Sequence of times} \item{xfd,yfd,zfd}{Functional data objects (see \code{\link[fda]{fd}}) for the x, y, and z-coordinates}  
+#' 
+#' @export
+#' @importFrom fda eval.fd
+#' @importFrom rgl plot3d
+#' @importFrom grDevices rainbow
+#' @importFrom scatterplot3d scatterplot3d
+scat3d <-
+function(obj, person, npoints=1001, deriv=0, tmin=NULL, tmax=NULL, cex=.5, col=rainbow(npoints, end=5/6), plotter="rgl", ...) {
+	t.all = obj$bsb$rangeval
+	if (person==0) {
+		xfd = obj$x0; yfd = obj$y0; zfd= obj$z0
+	} else if (person==1) {
+		xfd = obj$x1; yfd = obj$y1; zfd= obj$z1		
+	}
+	if (is.null(tmin)) trange = t.all
+	else {
+		if (tmin<t.all[1]) stop("tmin too low")
+		if (tmax>t.all[2]) stop("tmax too high")
+		trange <- c(tmin, tmax)
+	}
+	tseq <- seq(trange[1], trange[2], , npoints)
+	xvec <- eval.fd(tseq, xfd, Lfdobj=deriv)
+	yvec <- eval.fd(tseq, yfd, Lfdobj=deriv)
+	zvec <- eval.fd(tseq, zfd, Lfdobj=deriv)
+	if (plotter=="scatterplot3d") {
+		scatterplot3d(xvec, yvec, zvec, color=col, pch=15, cex.symbols=cex, ...)
+	} else if (plotter=="rgl") {
+		plot3d(xvec, yvec, zvec, col=col, cex=cex, ...)
+	} 
+	list(tseq=tseq, xfd=xfd, yfd=yfd, zfd=zfd)
+}
