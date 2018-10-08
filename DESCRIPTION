@@ -8,4 +8,4 @@ Maintainer: Philip T. Reiss <reiss@stat.haifa.ac.il>
 Imports: fda, fields, ggplot2, graphics, grDevices, rgl, scatterplot3d, viridis
 Description: Computes cosine of the angle between velocity vectors, possibly with a lag, for two people moving simultaneously in 3D. The methods are described in Reiss, Gvirts, et al., "A time-varying measure of dyadic synchrony for three-dimensional motion."
 License: GPL-3
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
