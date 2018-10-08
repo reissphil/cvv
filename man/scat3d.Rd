@@ -4,8 +4,9 @@
 \alias{scat3d}
 \title{3D plotting of motion data}
 \usage{
-scat3d(obj, person, npoints = 1001, deriv = 0, tmin = NULL, tmax = NULL,
-  cex = 0.5, col = rainbow(npoints, end = 5/6), plotter = "rgl", ...)
+scat3d(obj, person, npoints = 1001, deriv = 0, tmin = NULL,
+  tmax = NULL, cex = 0.5, col = rainbow(npoints, end = 5/6),
+  plotter = "rgl", common.width = FALSE, ...)
 }
 \arguments{
 \item{obj}{A dyadic motion object outputted by \code{\link{make.fd}}}
@@ -24,6 +25,8 @@ scat3d(obj, person, npoints = 1001, deriv = 0, tmin = NULL, tmax = NULL,
 
 \item{plotter}{Character vector describing the plotting function to use: either "\code{\link[rgl]{plot3d}}" or "\code{\link[scatterplot3d]{scatterplot3d}}"}
 
+\item{common.width}{Logical: Should the plotting interval along each of the 3 dimensions be of equal width?}
+
 \item{\dots}{Arguments passed to the plotting function.}
 }
 \value{
@@ -32,4 +35,14 @@ A list with components
 }
 \description{
 Inputs a dyadic motion data produced by \code{\link{make.fd}}, and creates a 3D plot of the data for one member of the dyad.
+}
+\examples{
+# 3D plots as in Fig. 6 of Reiss, Gvirts et al.
+data(sync.fd)
+rnge <- c(61,62.2)  
+par(mfrow=1:2)
+pers0 <- scat3d(sync.fd, person=0, tmin=rnge[1], tmax=rnge[2], 
+           plotter="scatterplot3d", main="Leader", xlab='x', ylab='y', zlab='z')
+pers1 <- scat3d(sync.fd, person=1, tmin=rnge[1], tmax=rnge[2], 
+           plotter="scatterplot3d", main="Follower", xlab='x', ylab='y', zlab='z')
 }

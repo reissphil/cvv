@@ -5,8 +5,9 @@
 \title{Compute and plot cosine of velocity vectors at each of a set of lags}
 \usage{
 multilag(obj, timerange = NULL, lagvec = -2:2/10, npoints = 701,
-  power = 1, power.plot = 1, plot = "fields", legend.args = list(text =
-  "", side = 3), horizontal = FALSE, xlab = "Time", ylab = "Lag", ...)
+  power = 1, power.plot = 1, plot = "fields",
+  legend.args = list(text = "", side = 3), horizontal = FALSE,
+  xlab = "Time", ylab = "Lag", ...)
 }
 \arguments{
 \item{obj}{A dyadic motion object outputted by \code{\link{make.fd}}.}
@@ -35,4 +36,15 @@ A list with components
 }
 \description{
 Inputs a dyadic motion object outputted by \code{\link{make.fd}}, computes cosine of the two individuals' velocity vectors at each of the provided lag values, and makes a plot.
+}
+\examples{
+# Two types of lag plots, as in Figs. 5 and 6 of Reiss, Gvirts et al.
+data(sync.fd)
+rnge <- c(61,62.2)  
+
+fig5 <- multilag(sync.fd, lagvec=seq(-.4,.4,,31), npoints=801, horizontal=TRUE)
+abline(v=rnge[1], col="red")
+abline(v=rnge[2], col="red")
+
+fig6 <- multilag(sync.fd, rnge, plot="ggplot")
 }

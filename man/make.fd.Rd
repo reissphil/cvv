@@ -9,7 +9,7 @@ make.fd(tvec, p0, p1, nbasis = 300, lambda = NULL)
 \arguments{
 \item{tvec}{Vector of times}
 
-\item{p0, p1}{Vectors of positions for persons 0 and 1; each should be of same length as \code{tvec}}
+\item{p0, p1}{Matrices of 3D positions for persons 0 and 1 at the times given by \code{tvec}; each should have dimension \code{length(tvec)} by 3}
 
 \item{nbasis}{Dimension of B-spline basis used to represent each person's data along each dimension}
 
@@ -22,4 +22,7 @@ A list with elements
 \description{
 Inputs times and corresponding positions in 3D space for two individuals,
 and uses the \pkg{fda} package to create functional data objects representing both persons' data with respect to a B-spline basis.
+}
+\examples{
+# see ?syncsham
 }

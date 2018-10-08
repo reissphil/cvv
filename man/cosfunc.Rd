@@ -19,3 +19,7 @@ A function that inputs a vector of times, and outputs the cosines between the tw
 \description{
 Given a dyadic motion object produced by \code{\link{make.fd}}, along with a fixed lag, outputs a function mapping time points to lagged cosine of velocity vectors.
 }
+\seealso{
+\code{\link{multilag}}, which depends on this function. 
+Most users would probably use \code{\link{multilag}} rather than calling \code{cosfunc} directly.
+}
