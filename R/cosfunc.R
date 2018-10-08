@@ -8,6 +8,8 @@
 #' @param lag Lag for person 1 with respect to person 0. E.g., if lag=0.1, person 1 is assumed to lag behind person 0 by 0.1 second.
 #' @return A function that inputs a vector of times, and outputs the cosines between the two 3D velocity vectors at each of these times, at the given lag.
 #' 
+#' @seealso \code{\link{multilag}}, which depends on this function. 
+#' Most users would probably use \code{\link{multilag}} rather than calling \code{cosfunc} directly.
 #' @export
 #' @importFrom fda eval.fd
 cosfunc <-

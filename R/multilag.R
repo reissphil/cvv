@@ -20,6 +20,18 @@
 #' @importFrom graphics abline
 #' @importFrom viridis viridis
 #' @importFrom ggplot2 aes ggplot geom_line scale_colour_brewer labs
+#'
+#' @examples
+#' # Two types of lag plots, as in Figs. 5 and 6 of Reiss, Gvirts et al.
+#' data(sync.fd)
+#' rnge <- c(61,62.2)  
+#' 
+#' fig5 <- multilag(sync.fd, lagvec=seq(-.4,.4,,31), npoints=801, horizontal=TRUE)
+#' abline(v=rnge[1], col="red")
+#' abline(v=rnge[2], col="red")
+#' 
+#' fig6 <- multilag(sync.fd, rnge, plot="ggplot")
+
 multilag <-
 function(obj, timerange=NULL, lagvec=-2:2/10, npoints=701, power=1, power.plot=1, plot="fields", legend.args=list(text="", side=3), horizontal=FALSE, xlab="Time", ylab="Lag", ...) {
 	x0 <- obj$x0
